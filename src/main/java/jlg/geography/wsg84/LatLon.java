@@ -1,11 +1,14 @@
-package jlg.geography;
+package jlg.geography.wsg84;
+
+import jlg.geography.Boundable;
+import jlg.geography.BoundingBox;
 
 import static jlg.codecontract.CodeContract.verifyBetween;
 
 /**
  * Represents a set of geographic coordinates expressed as wsg84 latitude and longitude
  */
-public class LatLon {
+public class LatLon implements Boundable<LatLon> {
     private double latitude;
     private double longitude;
 
@@ -44,5 +47,10 @@ public class LatLon {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    @Override
+    public boolean isInBoundingBox(BoundingBox<LatLon> boundingBox) {
+        return boundingBox.contains(this);
     }
 }

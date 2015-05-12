@@ -1,21 +1,23 @@
-package jlg.geography;
+package jlg.geography.wsg84;
+
+import jlg.geography.BoundingBox;
 
 import java.util.List;
 
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyThat;
 
-public class LatLonBoundingBox implements BoundingBox<LatLon> {
+public class GeographicBoundingBox implements BoundingBox<LatLon> {
     private LatLon minCoordinate;
     private LatLon maxCoordinate;
     private LatLon centerCoordinate;
 
-    protected LatLonBoundingBox(){}
+    protected GeographicBoundingBox(){}
 
     /**
      * @param coordinates variable number of coordinates from which to build the bounding box. (minimum is 2)
      */
-    public LatLonBoundingBox(LatLon... coordinates){
+    public GeographicBoundingBox(LatLon... coordinates){
         verifyThat(coordinates.length >= 2);
 
         double minLat = Double.MAX_VALUE;
@@ -40,7 +42,7 @@ public class LatLonBoundingBox implements BoundingBox<LatLon> {
     /**
      * @param boundingBoxes a list of bounding boxes that will make up this larger bounding box
      */
-    public LatLonBoundingBox(List<LatLonBoundingBox> boundingBoxes){
+    public GeographicBoundingBox(List<GeographicBoundingBox> boundingBoxes){
         verifyThat(boundingBoxes != null);
         verifyNotEmpty(boundingBoxes);
 

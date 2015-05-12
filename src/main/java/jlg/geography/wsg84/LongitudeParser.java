@@ -1,4 +1,4 @@
-package jlg.geography;
+package jlg.geography.wsg84;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 

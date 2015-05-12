@@ -1,4 +1,6 @@
-package jlg.geography;
+package jlg.geography.cartesian;
+
+import jlg.geography.BoundingBox;
 
 import java.util.List;
 

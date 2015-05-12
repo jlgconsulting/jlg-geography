@@ -1,4 +1,4 @@
-package jlg.geography;
+package jlg.geography.wsg84;
 
 import java.text.DecimalFormat;
 

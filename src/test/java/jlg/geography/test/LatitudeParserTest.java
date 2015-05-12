@@ -1,7 +1,7 @@
 package jlg.geography.test;
 
 import jlg.codecontract.CodeContractException;
-import jlg.geography.LatitudeParser;
+import jlg.geography.wsg84.LatitudeParser;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;

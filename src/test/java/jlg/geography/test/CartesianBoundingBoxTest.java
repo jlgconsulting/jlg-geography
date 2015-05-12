@@ -1,7 +1,7 @@
 package jlg.geography.test;
 
-import jlg.geography.Cartesian;
-import jlg.geography.CartesianBoundingBox;
+import jlg.geography.cartesian.Cartesian;
+import jlg.geography.cartesian.CartesianBoundingBox;
 import org.junit.Test;
 
 import java.util.Arrays;

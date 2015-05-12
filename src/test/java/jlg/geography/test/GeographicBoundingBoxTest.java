@@ -1,16 +1,14 @@
 package jlg.geography.test;
 
-import jlg.geography.Cartesian;
-import jlg.geography.CartesianBoundingBox;
-import jlg.geography.LatLon;
-import jlg.geography.LatLonBoundingBox;
+import jlg.geography.wsg84.LatLon;
+import jlg.geography.wsg84.GeographicBoundingBox;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class LatLonBoundingBoxTest {
+public class GeographicBoundingBoxTest {
     @Test
     public void the_constructor_with_coordinate_args_should_build_correct_bounding_box(){
         //arrange
@@ -18,7 +16,7 @@ public class LatLonBoundingBoxTest {
         LatLon maxCoordinate = new LatLon(3,4);
 
         //act
-        LatLonBoundingBox boundingBox = new LatLonBoundingBox(minCoordinate, maxCoordinate);
+        GeographicBoundingBox boundingBox = new GeographicBoundingBox(minCoordinate, maxCoordinate);
 
         //assert
         assertEquals(1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
@@ -32,11 +30,11 @@ public class LatLonBoundingBoxTest {
     @Test
     public void the_constructor_with_list_of_bounding_boxes_should_build_correct_bounding_box(){
         //arrange
-        LatLonBoundingBox firstBox = new LatLonBoundingBox(new LatLon(1,1), new LatLon(5,5));
-        LatLonBoundingBox secondBox = new LatLonBoundingBox(new LatLon(3,3), new LatLon(7,7));
+        GeographicBoundingBox firstBox = new GeographicBoundingBox(new LatLon(1,1), new LatLon(5,5));
+        GeographicBoundingBox secondBox = new GeographicBoundingBox(new LatLon(3,3), new LatLon(7,7));
 
         //act
-        LatLonBoundingBox boundingBox = new LatLonBoundingBox(Arrays.asList(firstBox, secondBox));
+        GeographicBoundingBox boundingBox = new GeographicBoundingBox(Arrays.asList(firstBox, secondBox));
 
         //assert
         assertEquals(1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
@@ -52,7 +50,7 @@ public class LatLonBoundingBoxTest {
         //arrange
         LatLon minPoint = new LatLon(-10, -10);
         LatLon maxPoint = new LatLon(10, 10);
-        LatLonBoundingBox box = new LatLonBoundingBox(minPoint, maxPoint);
+        GeographicBoundingBox box = new GeographicBoundingBox(minPoint, maxPoint);
         LatLon aPointInsideBoundingBox = new LatLon(-5, 5);
 
         //act
@@ -69,7 +67,7 @@ public class LatLonBoundingBoxTest {
         //arrange
         LatLon minPoint = new LatLon(-10, -10);
         LatLon maxPoint = new LatLon(10, 10);
-        LatLonBoundingBox box = new LatLonBoundingBox(minPoint, maxPoint);
+        GeographicBoundingBox box = new GeographicBoundingBox(minPoint, maxPoint);
         LatLon aPointOutsideBoundingBox = new LatLon(11, 11);
 
         //act
