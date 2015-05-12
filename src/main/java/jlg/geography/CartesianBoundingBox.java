@@ -13,19 +13,28 @@ public class CartesianBoundingBox implements BoundingBox<Cartesian> {
     protected CartesianBoundingBox(){}
 
     /**
-     * @param minCoordinate minimum x and y values for the boundign box
-     * @param maxCoordinate maximum x and y values for the bounding box
+     * @param coordinates variable number of coordinates from which to build the bounding box. (minimum is 2)
      */
-    public CartesianBoundingBox(Cartesian minCoordinate, Cartesian maxCoordinate){
-        verifyThat(minCoordinate != null);
-        verifyThat(maxCoordinate != null);
+    public CartesianBoundingBox(Cartesian... coordinates){
+        verifyThat(coordinates.length >= 2);
 
+        int minX = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxY = Integer.MIN_VALUE;
+
+        for(Cartesian cartesian : coordinates){
+            minX = Integer.min(minX, cartesian.getX());
+            maxX = Integer.max(maxX, cartesian.getX());
+            minY = Integer.min(minY, cartesian.getY());
+            maxY = Integer.max(maxY, cartesian.getY());
+        }
+
+        minCoordinate = new Cartesian(minX, minY);
+        maxCoordinate = new Cartesian(maxX, maxY);
         int centerX = (maxCoordinate.getX() + minCoordinate.getX()) / 2;
         int centerY = (maxCoordinate.getY() + minCoordinate.getY()) / 2;
-
-        this.minCoordinate = minCoordinate;
-        this.maxCoordinate = maxCoordinate;
-        this.centerCoordinate = new Cartesian(centerX, centerY);
+        centerCoordinate = new Cartesian(centerX, centerY);
     }
 
     /**
@@ -40,11 +49,11 @@ public class CartesianBoundingBox implements BoundingBox<Cartesian> {
         int maxLatitude = boundingBoxes.stream().mapToInt(x -> x.getMaxCoordinate().getX()).max().getAsInt();
         int maxLongitude = boundingBoxes.stream().mapToInt(x -> x.getMaxCoordinate().getY()).max().getAsInt();
 
-        this.minCoordinate = new Cartesian(minLatitude, minLongitude);
-        this.maxCoordinate = new Cartesian(maxLatitude, maxLongitude);
+        minCoordinate = new Cartesian(minLatitude, minLongitude);
+        maxCoordinate = new Cartesian(maxLatitude, maxLongitude);
         int centerLat = (maxCoordinate.getX() + minCoordinate.getY()) / 2;
         int centerLon = (maxCoordinate.getX() + minCoordinate.getY()) / 2;
-        this.centerCoordinate = new Cartesian(centerLat,centerLon);
+        centerCoordinate = new Cartesian(centerLat,centerLon);
     }
 
     @Override

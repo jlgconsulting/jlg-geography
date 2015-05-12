@@ -4,6 +4,8 @@ import jlg.geography.Cartesian;
 import jlg.geography.CartesianBoundingBox;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class CartesianBoundingBoxTest {
@@ -27,11 +29,24 @@ public class CartesianBoundingBoxTest {
 
     @Test
     public void the_constructor_with_list_of_bounding_boxes_should_build_correct_bounding_box(){
+        //arrange
+        CartesianBoundingBox firstBox = new CartesianBoundingBox(new Cartesian(1,1), new Cartesian(5,5));
+        CartesianBoundingBox secondBox = new CartesianBoundingBox(new Cartesian(3,3), new Cartesian(7,7));
 
+        //act
+        CartesianBoundingBox boundingBox = new CartesianBoundingBox(Arrays.asList(firstBox,secondBox));
+
+        //assert
+        assertEquals(1, boundingBox.getMinCoordinate().getX());
+        assertEquals(1, boundingBox.getMinCoordinate().getY());
+        assertEquals(7, boundingBox.getMaxCoordinate().getX());
+        assertEquals(7, boundingBox.getMaxCoordinate().getY());
+        assertEquals(4, boundingBox.getCenterCoordinate().getX());
+        assertEquals(4, boundingBox.getCenterCoordinate().getY());
     }
 
     @Test
-    public void the_contains_method_when_point_is_inside_outside_bounding_box_should_return_true() {
+    public void the_contains_method_when_point_is_inside_bounding_box_should_return_true() {
         //arrange
         Cartesian minPoint = new Cartesian(-100, -100);
         Cartesian maxPoint = new Cartesian(100, 100);
