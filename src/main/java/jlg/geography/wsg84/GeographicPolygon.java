@@ -8,6 +8,7 @@ public class GeographicPolygon extends AbstractPolygon<LatLon> {
     public GeographicPolygon(LatLon[] points){
         super(points);
         checkIfPolygonIsClosed();
+        boundingBox = new GeographicBoundingBox(points);
     }
 
     public GeographicPolygon(double[] coordinates){
@@ -16,11 +17,7 @@ public class GeographicPolygon extends AbstractPolygon<LatLon> {
             this.points.add(new LatLon(coordinates[i],coordinates[i+1]));
         }
         checkIfPolygonIsClosed();
-    }
-
-    @Override
-    public BoundingBox<LatLon> getBoundingBox() {
-        return new GeographicBoundingBox(points.toArray(new LatLon[this.points.size()]));
+        boundingBox = new GeographicBoundingBox(points.toArray(new LatLon[this.points.size()]));
     }
 
     @Override

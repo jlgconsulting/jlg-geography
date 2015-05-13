@@ -8,6 +8,7 @@ public class CartesianPolygon extends AbstractPolygon<Cartesian>{
     public CartesianPolygon(Cartesian[] points){
         super(points);
         checkIfPolygonIsClosed();
+        boundingBox = new CartesianBoundingBox(points);
     }
 
     public CartesianPolygon(int[] coordinates){
@@ -16,11 +17,7 @@ public class CartesianPolygon extends AbstractPolygon<Cartesian>{
             this.points.add(new Cartesian(coordinates[i],coordinates[i+1]));
         }
         checkIfPolygonIsClosed();
-    }
-
-    @Override
-    public BoundingBox<Cartesian> getBoundingBox() {
-        return new CartesianBoundingBox(points.toArray(new Cartesian[points.size()]));
+        boundingBox = new CartesianBoundingBox(points.toArray(new Cartesian[points.size()]));
     }
 
     @Override

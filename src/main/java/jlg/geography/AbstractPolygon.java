@@ -10,6 +10,7 @@ import static jlg.codecontract.CodeContract.verifyThat;
 
 public abstract class AbstractPolygon<TPoint> {
     protected List<TPoint> points;
+    protected BoundingBox<TPoint> boundingBox;
 
     protected AbstractPolygon(){
         this.points = new ArrayList<>();
@@ -22,7 +23,9 @@ public abstract class AbstractPolygon<TPoint> {
         this.points = Arrays.asList(points);
     }
 
-    public abstract BoundingBox<TPoint> getBoundingBox();
+    public BoundingBox<TPoint> getBoundingBox(){
+        return boundingBox;
+    }
 
     public List<TPoint> getPoints() {
         return points;
