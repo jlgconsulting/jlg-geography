@@ -21,7 +21,7 @@ public class CartesianProjection extends AbstractProjection<LatLon, Cartesian> {
     }
 
     @Override
-    public Cartesian project(LatLon latLon) {
+    public Cartesian project(LatLon latLon, int altitude) {
         double[] result = new double[2];
         double rp_sqe;
         double rp_b;
@@ -45,8 +45,8 @@ public class CartesianProjection extends AbstractProjection<LatLon, Cartesian> {
         double rlong = latLon.getLongitude() * DEGREES_TO_RADIANS;
         double radius = EARTH_MAJOR_AXIS_IN_METERS;
         double eccentricitySquared = EARTH_ECCENTRICITY * EARTH_ECCENTRICITY;
-        double centreLatitude = latLon.getLatitude();
-        double centreLongitude = latLon.getLongitude();
+        double centreLatitude = center.getLatitude();
+        double centreLongitude = center.getLongitude();
         centreLatitude = centreLatitude * DEGREES_TO_RADIANS;
         centreLongitude = centreLongitude * DEGREES_TO_RADIANS;
 
@@ -68,7 +68,6 @@ public class CartesianProjection extends AbstractProjection<LatLon, Cartesian> {
         cli = Math.cos(rlong - centreLongitude);
 
         //Can change altitude if required
-        int altitude = 0;
         rhinm = altitude;
 
         x = (radius * cki + rhinm * cpi) * sli;
