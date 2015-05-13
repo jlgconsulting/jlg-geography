@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CartesianPolygonPointTest {
+public class CartesianPolygonTest {
 
     @Test
     public void the_constructor_with_points_should_build_polygon() {
