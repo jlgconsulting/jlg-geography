@@ -1,7 +1,5 @@
 package jlg.geography.wsg84;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.text.DecimalFormat;
 
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
