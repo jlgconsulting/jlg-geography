@@ -1,6 +1,7 @@
 package jlg.geography.wsg84;
 
 import jlg.geography.AbstractMultiPolygon;
+import jlg.geography.GeometryFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
-public class GeographicMultiPolygon extends AbstractMultiPolygon<GeographicPolygon, LatLon> {
+public class GeographicMultiPolygon extends AbstractMultiPolygon<GeographicPolygon, LatLon> implements GeometryFeature {
     private GeographicBoundingBox boundingBox;
 
     public GeographicMultiPolygon(List<List<Double>> multiPolygonPoints){

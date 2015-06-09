@@ -1,12 +1,32 @@
 package jlg.geography.wsg84;
 
+import jlg.geography.GeometryFeature;
+
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
 /**
  * Utility class that transforms various wsg84 shapes into a WKT string
  */
 public class WktFormat {
-    public static String transform(LatLon point){
+    public static String transform(GeometryFeature geographicFeature){
+        if(geographicFeature instanceof LatLon){
+            return transform((LatLon)geographicFeature);
+        }
+        else if(geographicFeature instanceof GeographicLine){
+            return transform((GeographicLine) geographicFeature);
+        }
+        else if(geographicFeature instanceof GeographicPolygon){
+            return transform((GeographicPolygon) geographicFeature);
+        }
+        else if(geographicFeature instanceof GeographicMultiPolygon){
+            return transform((GeographicMultiPolygon)geographicFeature);
+        }
+        else{
+            throw new RuntimeException("The geographic feature type is not recognized. Must be LatLon,GeographicLine,GeographicPolygon,GeographicMultiPolygon");
+        }
+    }
+
+    private static String transform(LatLon point){
         verifyNotNull(point);
 
         StringBuilder sb = new StringBuilder();
@@ -14,7 +34,7 @@ public class WktFormat {
         return sb.toString();
     }
 
-    public static String transform(GeographicLine line){
+    private static String transform(GeographicLine line){
         verifyNotNull(line);
 
         StringBuilder sb = new StringBuilder();
@@ -28,7 +48,7 @@ public class WktFormat {
         return sb.toString();
     }
 
-    public static String transform(GeographicPolygon polygon){
+    private static String transform(GeographicPolygon polygon){
         verifyNotNull(polygon);
 
         StringBuilder sb = new StringBuilder();
@@ -43,7 +63,7 @@ public class WktFormat {
         return sb.toString();
     }
 
-    public static String transform(GeographicMultiPolygon multiPolygon){
+    private static String transform(GeographicMultiPolygon multiPolygon){
         verifyNotNull(multiPolygon);
 
         StringBuilder sb = new StringBuilder();

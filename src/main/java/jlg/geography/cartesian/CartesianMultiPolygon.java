@@ -1,7 +1,7 @@
 package jlg.geography.cartesian;
 
 import jlg.geography.AbstractMultiPolygon;
-import jlg.geography.wsg84.LatLon;
+import jlg.geography.GeometryFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
-public class CartesianMultiPolygon extends AbstractMultiPolygon<CartesianPolygon,Cartesian> {
+public class CartesianMultiPolygon extends AbstractMultiPolygon<CartesianPolygon,Cartesian> implements GeometryFeature {
     private CartesianBoundingBox boundingBox;
 
     public CartesianMultiPolygon(List<List<Integer>> multiPolygonPoints){

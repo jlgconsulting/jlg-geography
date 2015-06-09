@@ -2,9 +2,9 @@ package jlg.geography.cartesian;
 
 import jlg.codecontract.CodeContractException;
 import jlg.geography.AbstractPolygon;
-import jlg.geography.BoundingBox;
+import jlg.geography.GeometryFeature;
 
-public class CartesianPolygon extends AbstractPolygon<Cartesian>{
+public class CartesianPolygon extends AbstractPolygon<Cartesian> implements GeometryFeature {
     public CartesianPolygon(Cartesian[] points){
         super(points);
         checkIfPolygonIsClosed();

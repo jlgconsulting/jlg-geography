@@ -1,11 +1,12 @@
 package jlg.geography.wsg84;
 
 import jlg.geography.AbstractLine;
+import jlg.geography.GeometryFeature;
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
 
-public class GeographicLine extends AbstractLine<LatLon> {
+public class GeographicLine extends AbstractLine<LatLon> implements GeometryFeature {
     public GeographicLine(LatLon[] points){
         super(points);
     }

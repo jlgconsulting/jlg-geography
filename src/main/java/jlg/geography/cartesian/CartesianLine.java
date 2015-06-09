@@ -1,6 +1,7 @@
 package jlg.geography.cartesian;
 
 import jlg.geography.AbstractLine;
+import jlg.geography.GeometryFeature;
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
@@ -8,7 +9,7 @@ import static jlg.codecontract.CodeContract.verifyThat;
 /**
  * Represents a list of geographic coordinates that are united to form a line.
  */
-public class CartesianLine extends AbstractLine<Cartesian> {
+public class CartesianLine extends AbstractLine<Cartesian> implements GeometryFeature {
     public CartesianLine(Cartesian[] points){
         super(points);
     }

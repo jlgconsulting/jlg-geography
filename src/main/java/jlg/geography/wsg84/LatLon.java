@@ -2,13 +2,14 @@ package jlg.geography.wsg84;
 
 import jlg.geography.Boundable;
 import jlg.geography.BoundingBox;
+import jlg.geography.GeometryFeature;
 
 import static jlg.codecontract.CodeContract.verifyBetween;
 
 /**
  * Represents a set of geographic coordinates expressed as wsg84 latitude and longitude
  */
-public class LatLon implements Boundable<LatLon> {
+public class LatLon implements Boundable<LatLon>, GeometryFeature {
     private double latitude;
     private double longitude;
 

@@ -2,11 +2,12 @@ package jlg.geography.cartesian;
 
 import jlg.geography.Boundable;
 import jlg.geography.BoundingBox;
+import jlg.geography.GeometryFeature;
 
 /**
  * Structure for holding cartesian information for a point in two dimensions
  */
-public class Cartesian implements Boundable<Cartesian> {
+public class Cartesian implements Boundable<Cartesian>, GeometryFeature {
     private int x;
     private int y;
 

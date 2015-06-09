@@ -2,9 +2,9 @@ package jlg.geography.wsg84;
 
 import jlg.codecontract.CodeContractException;
 import jlg.geography.AbstractPolygon;
-import jlg.geography.BoundingBox;
+import jlg.geography.GeometryFeature;
 
-public class GeographicPolygon extends AbstractPolygon<LatLon> {
+public class GeographicPolygon extends AbstractPolygon<LatLon> implements GeometryFeature {
     public GeographicPolygon(LatLon[] points){
         super(points);
         checkIfPolygonIsClosed();
