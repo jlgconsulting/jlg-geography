@@ -1,6 +1,5 @@
 package jlg.geography.test;
 
-
 import jlg.geography.geometry.MultiPolygon;
 import org.junit.Test;
 
@@ -10,15 +9,14 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class CartesianMultiPolygonTest {
+public class MultiPolygonTest {
     @Test
     public void the_constructor_when_points_are_valid_should_build_multi_polygon(){
         //arrange
-        final List<Double> somePolygonCoordinates = new ArrayList<>(Arrays.asList(10.0, 11.0, 12.0, 13.0, 10.0, 11.0));
-        final List<Double> someOtherPolygonCoordinates = new ArrayList<>(Arrays.asList(15.0, 15.0, 12.0, 13.0, 15.0, 15.0));
+        final List<Double> somePolygonCoordinates = new ArrayList<Double>(Arrays.asList(10.123, 11.123, 12.123, 13.123, 10.123, 11.123));
+        final List<Double> someOtherPolygonCoordinates = new ArrayList<>(Arrays.asList(15.123, 15.123, 12.123, 13.123, 15.123, 15.123));
         List<List<Double>> multipolygonPoints = new ArrayList<List<Double>>(){{
-            add(somePolygonCoordinates);
-            add(someOtherPolygonCoordinates);
+            add(somePolygonCoordinates);add(someOtherPolygonCoordinates);
         }};
 
         //act

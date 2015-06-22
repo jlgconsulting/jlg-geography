@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class GeographicBoundingBoxTest {
+public class BoundingBoxTest {
     @Test
     public void the_constructor_with_coordinate_args_should_build_correct_bounding_box(){
         //arrange
@@ -19,12 +19,12 @@ public class GeographicBoundingBoxTest {
         BoundingBox boundingBox = new BoundingBox(minCoordinate, maxCoordinate);
 
         //assert
-        assertEquals(1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
-        assertEquals(2, boundingBox.getMinCoordinate().getLongitude(), 0.000001);
-        assertEquals(3, boundingBox.getMaxCoordinate().getLatitude(), 0.000001);
-        assertEquals(4, boundingBox.getMaxCoordinate().getLongitude(), 0.000001);
-        assertEquals(2, boundingBox.getCenterCoordinate().getLatitude(), 0.000001);
-        assertEquals(3, boundingBox.getCenterCoordinate().getLongitude(), 0.000001);
+        assertEquals("Min coordinate latitude incorect", 1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
+        assertEquals("Min coordinate longitude incorect", 2, boundingBox.getMinCoordinate().getLongitude(), 0.000001);
+        assertEquals("Max coordinate latitude incorect", 3, boundingBox.getMaxCoordinate().getLatitude(), 0.000001);
+        assertEquals("Max coordinate longitude incorect", 4, boundingBox.getMaxCoordinate().getLongitude(), 0.000001);
+        assertEquals("Center coordinate latitude incorect", 2, boundingBox.getCenterCoordinate().getLatitude(), 0.000001);
+        assertEquals("Center coordinate longitude incorect", 3, boundingBox.getCenterCoordinate().getLongitude(), 0.000001);
     }
 
     @Test

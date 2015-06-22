@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 @RunWith(JUnitParamsRunner.class)
-public class LatLonTest {
+public class PointTest {
 
     @Test
     @Parameters({"-90,-180","-45,-90","0,0","45,90","90,180"})
@@ -31,7 +31,7 @@ public class LatLonTest {
         double aValidLongitude = 11.123456;
 
         //act
-        Point coordinate = new Point(invalidLatitude,aValidLongitude);
+        Point coordinate = Point.buildFromWsg84Coordinates(invalidLatitude, aValidLongitude);
     }
 
     @Test(expected = CodeContractException.class)
@@ -41,7 +41,7 @@ public class LatLonTest {
         double aValidLatitude = 11.123456;
 
         //act
-        Point coordinate = new Point(aValidLatitude,invalidLongitude);
+        Point coordinate = Point.buildFromWsg84Coordinates(aValidLatitude,invalidLongitude);
     }
 
     @Test

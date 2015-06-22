@@ -26,11 +26,11 @@ public class BoundingBox {
             maxY = Double.max(maxY, point.getLatitude());
         }
 
-        minCoordinate = new Point(minX, minY);
-        maxCoordinate = new Point(maxX, maxY);
+        minCoordinate = new Point(minY, minX);
+        maxCoordinate = new Point(maxY, maxX);
         double centerX = (maxCoordinate.getLongitude() + minCoordinate.getLongitude()) / 2;
         double centerY = (maxCoordinate.getLatitude() + minCoordinate.getLatitude()) / 2;
-        centerCoordinate = new Point(centerX, centerY);
+        centerCoordinate = new Point(centerY, centerX);
     }
 
     public BoundingBox(List<BoundingBox> boundingBoxes) {

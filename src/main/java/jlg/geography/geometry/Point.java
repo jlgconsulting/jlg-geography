@@ -1,11 +1,12 @@
 package jlg.geography.geometry;
 
-import jlg.geography.Boundable;
 import jlg.geography.GeometryFeature;
 import jlg.geography.wsg84.LatitudeParser;
 import jlg.geography.wsg84.LongitudeParser;
 
-public class Point implements Boundable, GeometryFeature{
+import static jlg.codecontract.CodeContract.verifyBetween;
+
+public class Point implements GeometryFeature{
 
 
     private double latitude;
@@ -40,8 +41,14 @@ public class Point implements Boundable, GeometryFeature{
         return longitude;
     }
 
-    @Override
     public boolean isInBoundingBox(BoundingBox boundingBox) {
-        return false;
+        return boundingBox.contains(this);
+    }
+
+    public static Point buildFromWsg84Coordinates(double latitude, double longitude){
+        verifyBetween(latitude, -90, 90);
+        verifyBetween(longitude, -180, 180);
+
+        return new Point(latitude, longitude);
     }
 }

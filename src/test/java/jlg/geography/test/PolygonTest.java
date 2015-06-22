@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class GeographicPolygonTest {
+public class PolygonTest {
     @Test
     public void the_constructor_with_points_should_build_polygon() {
         //arrange

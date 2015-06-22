@@ -1,7 +1,7 @@
 package jlg.geography.geometry;
 
 import jlg.geography.GeometryFeature;
-import jlg.geography.HasBoundingBox;
+import jlg.geography.Boundable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
-public class MultiPolygon implements HasBoundingBox, GeometryFeature{
+public class MultiPolygon implements Boundable, GeometryFeature{
     private BoundingBox boundingBox;
     private List<Polygon> polygons;
     private List<Point> points;

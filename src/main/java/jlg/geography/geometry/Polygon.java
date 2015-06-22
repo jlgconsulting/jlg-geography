@@ -2,12 +2,13 @@ package jlg.geography.geometry;
 
 import jlg.codecontract.CodeContractException;
 import jlg.geography.GeometryFeature;
-import jlg.geography.HasBoundingBox;
+import jlg.geography.Boundable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Polygon implements HasBoundingBox, GeometryFeature{
+public class Polygon implements Boundable, GeometryFeature{
     private List<Point> points;
     private BoundingBox boundingBox;
 
@@ -18,6 +19,7 @@ public class Polygon implements HasBoundingBox, GeometryFeature{
     }
 
     public Polygon(double[] coordinates) {
+        points = new ArrayList<>();
         for(int i=0; i<coordinates.length;i+=2){
             this.points.add(new Point(coordinates[i],coordinates[i+1]));
         }
