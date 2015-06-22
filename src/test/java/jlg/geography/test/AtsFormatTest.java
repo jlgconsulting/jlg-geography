@@ -59,7 +59,7 @@ public class AtsFormatTest {
         int expenctedNumberOfPoints = 7;
         assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsLine.length);
         assertEquals("First point is not same with last", atsLine[0].getX(), atsLine[6].getX(), 0.001);
-        assertEquals("incorrect object", p3.getLatitude(), atsLine[4].getY(), 0.01);
+        assertEquals("Incorrect object", p3.getLatitude(), atsLine[4].getY(), 0.01);
     }
 
     @Test
@@ -97,8 +97,9 @@ public class AtsFormatTest {
         AtsPoint[][] atsMultiPolygon = formatter.transformMultiPolygon(multiPolygon);
 
         // assert
-        int expenctedNumberOfPoints = 5;
         int expedtedNumberOfPolygons = 2;
         assertEquals("Incorrect number of polygons", expedtedNumberOfPolygons, atsMultiPolygon.length);
+        assertEquals("Incorrect lenght of internal polygon", 3, atsMultiPolygon[1].length);
+        assertEquals("Incorrect corespondent", 10.123, atsMultiPolygon[0][2].getY(), 0.001);
     }
 }
