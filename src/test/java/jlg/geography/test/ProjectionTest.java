@@ -34,7 +34,7 @@ public class ProjectionTest {
         int altitudeInMeters = 100;
 
         //act
-        Point result = projection.project(new Point(500,500),100);
+        Point result = projection.project(new Point(yInMeters, xInMeters), altitudeInMeters);
 
         //assert
         assertEquals(48.404496, result.getLatitude(),0.000001);
