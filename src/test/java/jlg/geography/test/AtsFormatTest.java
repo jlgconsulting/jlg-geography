@@ -53,13 +53,13 @@ public class AtsFormatTest {
         Line line = new Line(points);
 
         // act
-        AtsPoint[] atsLine = formatter.transformLine(line);
+        AtsPoint[][] atsLine = formatter.transformLine(line);
 
         // assert
         int expenctedNumberOfPoints = 7;
-        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsLine.length);
-        assertEquals("First point is not same with last", atsLine[0].getX(), atsLine[6].getX(), 0.001);
-        assertEquals("Incorrect object", p3.getLatitude(), atsLine[4].getY(), 0.01);
+        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsLine[0].length);
+        assertEquals("First point is not same with last", atsLine[0][0].getX(), atsLine[0][6].getX(), 0.001);
+        assertEquals("Incorrect object", p3.getLatitude(), atsLine[0][4].getY(), 0.01);
     }
 
     @Test
@@ -75,12 +75,12 @@ public class AtsFormatTest {
         Polygon polygon = new Polygon(points);
 
         // act
-        AtsPoint[] atsPolygon = formatter.transformPolygon(polygon);
+        AtsPoint[][] atsPolygon = formatter.transformPolygon(polygon);
 
         // assert
         int expenctedNumberOfPoints = 5;
-        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsPolygon.length);
-        assertEquals("First point is not same with last", atsPolygon[0].getX(), atsPolygon[4].getX(), 0.001);
+        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsPolygon[0].length);
+        assertEquals("First point is not same with last", atsPolygon[0][0].getX(), atsPolygon[0][4].getX(), 0.001);
     }
 
     @Test

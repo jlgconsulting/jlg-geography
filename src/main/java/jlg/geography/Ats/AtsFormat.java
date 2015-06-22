@@ -5,13 +5,15 @@ import jlg.geography.geometry.MultiPolygon;
 import jlg.geography.geometry.Point;
 import jlg.geography.geometry.Polygon;
 
+import java.util.List;
+
 public class AtsFormat {
 
     public AtsPoint transformPoint(Point point) {
         return new AtsPoint(point.getLongitude(), point.getLatitude());
     }
 
-    public AtsPoint[] transformLine(Line line) {
+    public AtsPoint[][] transformLine(Line line) {
         AtsPoint[] atsLine = new AtsPoint[line.getPoints().size() * 2 - 1];
         int lastIndex = line.getPoints().size() * 2 - 2;
 
@@ -23,30 +25,41 @@ public class AtsFormat {
             atsLine[lastIndex - i] = atsPoint;
         }
 
-        return atsLine;
+        AtsPoint[][] finalAtsLine = new AtsPoint[1][];
+        finalAtsLine[0] = atsLine;
+        return finalAtsLine;
     }
 
-    public AtsPoint[] transformPolygon(Polygon polygon) {
-        AtsPoint[] atsPolygon = new AtsPoint[polygon.getPoints().size()];
+    public AtsPoint[][] transformPolygon(Polygon polygon) {
 
-        for (int i = 0; i < polygon.getPoints().size(); i++) {
-            AtsPoint atsPoint = new AtsPoint();
-            atsPoint.setX(polygon.getPoints().get(i).getLongitude());
-            atsPoint.setY(polygon.getPoints().get(i).getLatitude());
-            atsPolygon[i] = atsPoint;
-        }
+        AtsPoint[] atsPolygon = formatSinglePolygon(polygon.getPoints());
 
-        return atsPolygon;
+        AtsPoint[][] finalAtsPolygon = new AtsPoint[1][];
+        finalAtsPolygon[0] = atsPolygon;
+        return finalAtsPolygon;
     }
 
     public AtsPoint[][] transformMultiPolygon(MultiPolygon multiPolygon) {
         int size = multiPolygon.getPolygons().size();
         AtsPoint[][] atsMultiPolygon = new AtsPoint[size][];
 
+        for (int i = 0; i < multiPolygon.getPolygons().size(); i++)
+            atsMultiPolygon[i] = formatSinglePolygon(multiPolygon.getPolygons().get(i).getPoints());
 
-        for (int i = 0; i < size; i++)
-            atsMultiPolygon[i] = transformPolygon(multiPolygon.getPolygons().get(i));
 
         return atsMultiPolygon;
+    }
+
+    private AtsPoint[] formatSinglePolygon(List<Point> points) {
+        AtsPoint[] atsPolygon = new AtsPoint[points.size()];
+
+        for (int i = 0; i < points.size(); i++) {
+            AtsPoint atsPoint = new AtsPoint();
+            atsPoint.setX(points.get(i).getLongitude());
+            atsPoint.setY(points.get(i).getLatitude());
+            atsPolygon[i] = atsPoint;
+        }
+
+        return atsPolygon;
     }
 }
