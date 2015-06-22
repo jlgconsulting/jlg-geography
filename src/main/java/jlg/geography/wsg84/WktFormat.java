@@ -1,6 +1,10 @@
 package jlg.geography.wsg84;
 
 import jlg.geography.GeometryFeature;
+import jlg.geography.geometry.Line;
+import jlg.geography.geometry.MultiPolygon;
+import jlg.geography.geometry.Point;
+import jlg.geography.geometry.Polygon;
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
@@ -9,24 +13,24 @@ import static jlg.codecontract.CodeContract.verifyNotNull;
  */
 public class WktFormat {
     public static String transform(GeometryFeature geographicFeature){
-        if(geographicFeature instanceof LatLon){
-            return transform((LatLon)geographicFeature);
+        if(geographicFeature instanceof Point){
+            return transformPoint((Point) geographicFeature);
         }
-        else if(geographicFeature instanceof GeographicLine){
-            return transform((GeographicLine) geographicFeature);
+        else if(geographicFeature instanceof Line){
+            return transformLine((Line) geographicFeature);
         }
-        else if(geographicFeature instanceof GeographicPolygon){
-            return transform((GeographicPolygon) geographicFeature);
+        else if(geographicFeature instanceof Polygon){
+            return transformPolygon((Polygon) geographicFeature);
         }
-        else if(geographicFeature instanceof GeographicMultiPolygon){
-            return transform((GeographicMultiPolygon)geographicFeature);
+        else if(geographicFeature instanceof MultiPolygon){
+            return transformMultiPolygon((MultiPolygon) geographicFeature);
         }
         else{
             throw new RuntimeException("The geographic feature type is not recognized. Must be LatLon,GeographicLine,GeographicPolygon,GeographicMultiPolygon");
         }
     }
 
-    private static String transform(LatLon point){
+    private static String transformPoint(Point point){
         verifyNotNull(point);
 
         StringBuilder sb = new StringBuilder();
@@ -34,12 +38,12 @@ public class WktFormat {
         return sb.toString();
     }
 
-    private static String transform(GeographicLine line){
+    private static String transformLine(Line line){
         verifyNotNull(line);
 
         StringBuilder sb = new StringBuilder();
         sb.append("LINESTRING(");
-        for(LatLon point:line.getPoints()){
+        for(Point point:line.getPoints()){
             sb.append(point.getLongitude()).append(" ").append(point.getLatitude()).append(",");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));   //remove last ',' character
@@ -48,12 +52,12 @@ public class WktFormat {
         return sb.toString();
     }
 
-    private static String transform(GeographicPolygon polygon){
+    private static String transformPolygon(Polygon polygon){
         verifyNotNull(polygon);
 
         StringBuilder sb = new StringBuilder();
         sb.append("POLYGON((");
-        for(LatLon point:polygon.getPoints()){
+        for(Point point:polygon.getPoints()){
             //append each coordinate
             sb.append(point.getLongitude()).append(" ").append(point.getLatitude()).append(",");
         }
@@ -63,12 +67,12 @@ public class WktFormat {
         return sb.toString();
     }
 
-    private static String transform(GeographicMultiPolygon multiPolygon){
+    private static String transformMultiPolygon(MultiPolygon multiPolygon){
         verifyNotNull(multiPolygon);
 
         StringBuilder sb = new StringBuilder();
         sb.append("MULTIPOLYGON(");
-        for(GeographicPolygon polygon:multiPolygon.getPolygons()){
+        for(Polygon polygon:multiPolygon.getPolygons()){
             String polygonWkt = WktFormat.transform(polygon).replace("POLYGON","");
             sb.append(polygonWkt);
             sb.append(",");

@@ -1,8 +1,7 @@
 package jlg.geography.test;
 
-import jlg.geography.AbstractLine;
-import jlg.geography.cartesian.Cartesian;
-import jlg.geography.cartesian.CartesianLine;
+import jlg.geography.geometry.Line;
+import jlg.geography.geometry.Point;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,10 +10,10 @@ public class CartesianLineTest {
     @Test
     public void with_array_of_cartesian_points_should_build_line(){
         //arrange
-        Cartesian[] points = {new Cartesian(1,1), new Cartesian(2,2)};
+        Point[] points = {new Point(1,1), new Point(2,2)};
 
         //act
-        AbstractLine line = new CartesianLine(points);
+        Line line = new Line(points);
 
         //assert
         assertEquals(2, line.getPoints().size());
@@ -23,10 +22,10 @@ public class CartesianLineTest {
     @Test
     public void with_array_of_integer_coordiantes_should_build_line(){
         //arrange
-        int[] coordinates = {1,1,2,2};
+        double[] coordinates = {1,1,2,2};
 
         //act
-        AbstractLine line = new CartesianLine(coordinates);
+        Line line = new Line(coordinates);
 
         //assert
         assertEquals(2, line.getPoints().size());

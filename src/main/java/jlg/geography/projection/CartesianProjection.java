@@ -1,27 +1,28 @@
 package jlg.geography.projection;
 
-import jlg.geography.cartesian.Cartesian;
-import jlg.geography.wsg84.LatLon;
+import jlg.geography.geometry.Point;
+
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
 /**
  * Class that given a center lat and lon, projects a wsg84 coordinate to a cartesian point
  */
-public class CartesianProjection extends AbstractProjection<LatLon, Cartesian> {
-    private LatLon center;
+public class CartesianProjection extends AbstractProjection {
+
+    private Point center;
 
     /**
      * @param center the lat and lon for the (0,0) cartesian coordinate, from which all cartesian points
      *               start
      */
-    public CartesianProjection(LatLon center) {
+    public CartesianProjection(Point center) {
         verifyNotNull(center);
         this.center = center;
     }
 
     @Override
-    public Cartesian project(LatLon latLon, int altitude) {
+    public Point project(Point latLon, int altitude) {
         double[] result = new double[2];
         double rp_sqe;
         double rp_b;
@@ -78,7 +79,6 @@ public class CartesianProjection extends AbstractProjection<LatLon, Cartesian> {
         result[0] = (round(x * 2) / 2) * 2;
         result[1] = (round(y * 2) / 2) * 2;
 
-        return new Cartesian((int)result[0], (int)result[1]);
+        return new Point((int)result[0], (int)result[1]);
     }
-
 }

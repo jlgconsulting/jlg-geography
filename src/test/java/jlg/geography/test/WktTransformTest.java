@@ -1,6 +1,10 @@
 package jlg.geography.test;
 
-import jlg.geography.wsg84.*;
+import jlg.geography.geometry.Line;
+import jlg.geography.geometry.MultiPolygon;
+import jlg.geography.geometry.Point;
+import jlg.geography.geometry.Polygon;
+import jlg.geography.wsg84.WktFormat;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class WktTransformTest {
         //arrange
         double aLatitude = 10.123456;
         double aLongitude = 11.123456;
-        LatLon aCoordinate = new LatLon(aLatitude,aLongitude);
+        Point aCoordinate = new Point(aLatitude,aLongitude);
 
         //act
         String result = WktFormat.transform(aCoordinate);
@@ -32,7 +36,7 @@ public class WktTransformTest {
     public void should_transform_line_to_wkt_string(){
         //arrange
         double[] somePoints = {1.0, 2.0, 3.0, 4.0};
-        GeographicLine line = new GeographicLine(somePoints);
+        Line line = new Line(somePoints);
 
         //act
         String resultWkt = WktFormat.transform(line);
@@ -45,7 +49,7 @@ public class WktTransformTest {
     public void should_transform_polygon_to_wkt_string(){
         //arrange
         double[] someCoordinates = {10.123,11.123,12.123,13.123,10.123,11.123};
-        GeographicPolygon polygon = new GeographicPolygon(someCoordinates);
+        Polygon polygon = new Polygon(someCoordinates);
 
         //act
         String result = WktFormat.transform(polygon);
@@ -63,7 +67,7 @@ public class WktTransformTest {
         List<List<Double>> multipolygonPoints = new ArrayList<List<Double>>(){{
             add(somePolygonCoordinates);add(someOtherPolygonCoordinates);
         }};
-        GeographicMultiPolygon multiPolygon = new GeographicMultiPolygon(multipolygonPoints);
+        MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         //act
         String result = WktFormat.transform(multiPolygon);

@@ -1,11 +1,9 @@
 package jlg.geography.test;
 
 import jlg.codecontract.CodeContractException;
-import jlg.geography.BoundingBox;
-import jlg.geography.cartesian.Cartesian;
-import jlg.geography.cartesian.CartesianPolygon;
-import jlg.geography.wsg84.GeographicPolygon;
-import jlg.geography.wsg84.LatLon;
+import jlg.geography.geometry.BoundingBox;
+import jlg.geography.geometry.Point;
+import jlg.geography.geometry.Polygon;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,14 +14,14 @@ public class GeographicPolygonTest {
     @Test
     public void the_constructor_with_points_should_build_polygon() {
         //arrange
-        LatLon[] points = {
-                new LatLon(1, 1),
-                new LatLon(2, 2),
-                new LatLon(1, 1)
+        Point[] points = {
+                new Point(1, 1),
+                new Point(2, 2),
+                new Point(1, 1)
         };
 
         //act
-        GeographicPolygon polygon = new GeographicPolygon(points);
+        Polygon polygon = new Polygon(points);
 
         //assert
         assertEquals(3, polygon.getPoints().size());
@@ -32,14 +30,14 @@ public class GeographicPolygonTest {
     @Test(expected = CodeContractException.class)
     public void the_constructor_with_points_that_do_no_close_should_throw() {
         //arrange
-        LatLon[] points = {
-                new LatLon(1, 1),
-                new LatLon(2, 2),
-                new LatLon(3, 3)
+        Point[] points = {
+                new Point(1, 1),
+                new Point(2, 2),
+                new Point(3, 3)
         };
 
         //act
-        GeographicPolygon polygon = new GeographicPolygon(points);
+        Polygon polygon = new Polygon(points);
     }
 
     @Test
@@ -48,7 +46,7 @@ public class GeographicPolygonTest {
         double[] coordinates = {1, 1, 2, 2, 1, 1};
 
         //act
-        GeographicPolygon polygon = new GeographicPolygon(coordinates);
+        Polygon polygon = new Polygon(coordinates);
 
         //assert
         assertEquals(3, polygon.getPoints().size());
@@ -60,7 +58,7 @@ public class GeographicPolygonTest {
         double[] coordinates = {1, 1, 2, 2, 3, 3};
 
         //act
-        GeographicPolygon polygon = new GeographicPolygon(coordinates);
+        Polygon polygon = new Polygon(coordinates);
     }
 
     @Test
@@ -69,10 +67,10 @@ public class GeographicPolygonTest {
         double[] coordinates = {1, 1, 2, 2, 1, 1};
 
         //act
-        GeographicPolygon polygon = new GeographicPolygon(coordinates);
+        Polygon polygon = new Polygon(coordinates);
 
         //assert
-        BoundingBox<LatLon> boundingBox = polygon.getBoundingBox();
+        BoundingBox boundingBox = polygon.getBoundingBox();
         assertEquals(1, boundingBox.getMinCoordinate().getLatitude(),0.000001);
         assertEquals(1, boundingBox.getMinCoordinate().getLongitude(),0.000001);
         assertEquals(2, boundingBox.getMaxCoordinate().getLatitude(),0.000001);
@@ -82,16 +80,16 @@ public class GeographicPolygonTest {
     @Test
     public void the_contains_point_method_when_point_inside_should_return_true() {
         //arrange
-        LatLon[] points = {
-                new LatLon(1,1),
-                new LatLon(4,1),
-                new LatLon(4,3),
-                new LatLon(1,3),
-                new LatLon(1,1)
+        Point[] points = {
+                new Point(1,1),
+                new Point(4,1),
+                new Point(4,3),
+                new Point(1,3),
+                new Point(1,1)
         };
 
-        GeographicPolygon polygon = new GeographicPolygon(points);
-        LatLon pointInside = new LatLon(2,2);
+        Polygon polygon = new Polygon(points);
+        Point pointInside = new Point(2,2);
 
         //act
         boolean result = polygon.contains(pointInside);
@@ -103,16 +101,16 @@ public class GeographicPolygonTest {
     @Test
     public void the_contains_point_method_when_point_outside_should_return_false() {
         //arrange
-        LatLon[] points = {
-                new LatLon(1,1),
-                new LatLon(4,1),
-                new LatLon(4,3),
-                new LatLon(1,3),
-                new LatLon(1,1)
+        Point[] points = {
+                new Point(1,1),
+                new Point(4,1),
+                new Point(4,3),
+                new Point(1,3),
+                new Point(1,1)
         };
 
-        GeographicPolygon polygon = new GeographicPolygon(points);
-        LatLon pointOutside = new LatLon(4,4);
+        Polygon polygon = new Polygon(points);
+        Point pointOutside = new Point(4,4);
 
         //act
         boolean result = polygon.contains(pointOutside);

@@ -1,6 +1,6 @@
 package jlg.geography.test;
 
-import jlg.geography.wsg84.GeographicMultiPolygon;
+import jlg.geography.geometry.MultiPolygon;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class GeographicMultiPolygonTest {
         }};
 
         //act
-        GeographicMultiPolygon multiPolygon = new GeographicMultiPolygon(multipolygonPoints);
+        MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         //assert
         int expectedPolygons = 2;

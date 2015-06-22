@@ -1,21 +1,20 @@
 package jlg.geography.projection;
 
-import jlg.geography.cartesian.Cartesian;
-import jlg.geography.wsg84.LatLon;
+import jlg.geography.geometry.Point;
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 
 /**
  * Class that given a center lat and lon, projects a cartesian point to a wsg84 point
  */
-public class Wsg84Projection extends AbstractProjection<Cartesian,LatLon> {
-    private LatLon center;
+public class Wsg84Projection extends AbstractProjection {
+    private Point center;
 
     /**
      * @param center the lat and lon for the (0,0) cartesian coordinate, from which all cartesian points
      *                         start
      */
-    public Wsg84Projection(LatLon center){
+    public Wsg84Projection(Point center){
         verifyNotNull(center);
         this.center = center;
     }
@@ -26,7 +25,7 @@ public class Wsg84Projection extends AbstractProjection<Cartesian,LatLon> {
      * @return
      */
     @Override
-    public LatLon project(Cartesian cartesian, int altitude) {
+    public Point project(Point cartesian, int altitude) {
         verifyNotNull(cartesian);
 
         double centerLatitudeDouble = center.getLatitude();
@@ -63,8 +62,8 @@ public class Wsg84Projection extends AbstractProjection<Cartesian,LatLon> {
         float seconds;
         boolean flag = true; /* Conversion Confidence Flag */
 
-        double v = cartesian.getX();
-        double w = cartesian.getY();
+        double v = cartesian.getLongitude();
+        double w = cartesian.getLatitude();
         double tLatIn = centerLatitudeDouble;
         double tLongIn = centerLongitudeDouble;
 
@@ -177,6 +176,6 @@ public class Wsg84Projection extends AbstractProjection<Cartesian,LatLon> {
         result[0] = round(clat);
         result[1] = round(clong);
 
-        return new LatLon(result[0], result[1]);
+        return new Point(result[0], result[1]);
     }
 }

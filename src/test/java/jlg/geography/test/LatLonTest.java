@@ -1,7 +1,7 @@
 package jlg.geography.test;
 
 import jlg.codecontract.CodeContractException;
-import jlg.geography.wsg84.LatLon;
+import jlg.geography.geometry.Point;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class LatLonTest {
     @Parameters({"-90,-180","-45,-90","0,0","45,90","90,180"})
     public void the_constructor_with_wsg84_args_should_return_correct_value(double validLatitude, double validLongitude){
         //act
-        LatLon coordinate = new LatLon(validLatitude,validLongitude);
+        Point coordinate = new Point(validLatitude,validLongitude);
 
         //assert
         assertEquals(validLatitude, coordinate.getLatitude(), 0.000001);
@@ -31,7 +31,7 @@ public class LatLonTest {
         double aValidLongitude = 11.123456;
 
         //act
-        LatLon coordinate = new LatLon(invalidLatitude,aValidLongitude);
+        Point coordinate = new Point(invalidLatitude,aValidLongitude);
     }
 
     @Test(expected = CodeContractException.class)
@@ -41,7 +41,7 @@ public class LatLonTest {
         double aValidLatitude = 11.123456;
 
         //act
-        LatLon coordinate = new LatLon(aValidLatitude,invalidLongitude);
+        Point coordinate = new Point(aValidLatitude,invalidLongitude);
     }
 
     @Test
@@ -53,9 +53,9 @@ public class LatLonTest {
     })
     public void the_constructor_with_geographic_args_should_instantiate_correct_lat_lon(String geodeticLat, String geodeticLon, double expectedDecimalLat, double expectedDecimalLon){
         //act
-        LatLon latLonResult = null;
+        Point latLonResult = null;
         try {
-            latLonResult = new LatLon(geodeticLat, geodeticLon);
+            latLonResult = new Point(geodeticLat, geodeticLon);
         } catch (Exception e) {
             fail("should not have thrown exception");
         }

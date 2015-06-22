@@ -1,7 +1,7 @@
 package jlg.geography.test;
 
-import jlg.geography.wsg84.LatLon;
-import jlg.geography.wsg84.GeographicBoundingBox;
+import jlg.geography.geometry.BoundingBox;
+import jlg.geography.geometry.Point;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,11 +12,11 @@ public class GeographicBoundingBoxTest {
     @Test
     public void the_constructor_with_coordinate_args_should_build_correct_bounding_box(){
         //arrange
-        LatLon minCoordinate = new LatLon(1,2);
-        LatLon maxCoordinate = new LatLon(3,4);
+        Point minCoordinate = new Point(1,2);
+        Point maxCoordinate = new Point(3,4);
 
         //act
-        GeographicBoundingBox boundingBox = new GeographicBoundingBox(minCoordinate, maxCoordinate);
+        BoundingBox boundingBox = new BoundingBox(minCoordinate, maxCoordinate);
 
         //assert
         assertEquals(1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
@@ -30,11 +30,11 @@ public class GeographicBoundingBoxTest {
     @Test
     public void the_constructor_with_list_of_bounding_boxes_should_build_correct_bounding_box(){
         //arrange
-        GeographicBoundingBox firstBox = new GeographicBoundingBox(new LatLon(1,1), new LatLon(5,5));
-        GeographicBoundingBox secondBox = new GeographicBoundingBox(new LatLon(3,3), new LatLon(7,7));
+        BoundingBox firstBox = new BoundingBox(new Point(1,1), new Point(5,5));
+        BoundingBox secondBox = new BoundingBox(new Point(3,3), new Point(7,7));
 
         //act
-        GeographicBoundingBox boundingBox = new GeographicBoundingBox(Arrays.asList(firstBox, secondBox));
+        BoundingBox boundingBox = new BoundingBox(Arrays.asList(firstBox, secondBox));
 
         //assert
         assertEquals(1, boundingBox.getMinCoordinate().getLatitude(), 0.000001);
@@ -48,10 +48,10 @@ public class GeographicBoundingBoxTest {
     @Test
     public void the_contains_method_when_point_is_inside_bounding_box_should_return_true() {
         //arrange
-        LatLon minPoint = new LatLon(-10, -10);
-        LatLon maxPoint = new LatLon(10, 10);
-        GeographicBoundingBox box = new GeographicBoundingBox(minPoint, maxPoint);
-        LatLon aPointInsideBoundingBox = new LatLon(-5, 5);
+        Point minPoint = new Point(-10, -10);
+        Point maxPoint = new Point(10, 10);
+        BoundingBox box = new BoundingBox(minPoint, maxPoint);
+        Point aPointInsideBoundingBox = new Point(-5, 5);
 
         //act
         boolean result = box.contains(aPointInsideBoundingBox);
@@ -65,10 +65,10 @@ public class GeographicBoundingBoxTest {
     @Test
     public void the_contains_method_when_point_is_outside_bounding_box_should_return_false() {
         //arrange
-        LatLon minPoint = new LatLon(-10, -10);
-        LatLon maxPoint = new LatLon(10, 10);
-        GeographicBoundingBox box = new GeographicBoundingBox(minPoint, maxPoint);
-        LatLon aPointOutsideBoundingBox = new LatLon(11, 11);
+        Point minPoint = new Point(-10, -10);
+        Point maxPoint = new Point(10, 10);
+        BoundingBox box = new BoundingBox(minPoint, maxPoint);
+        Point aPointOutsideBoundingBox = new Point(11, 11);
 
         //act
         boolean result = box.contains(aPointOutsideBoundingBox);

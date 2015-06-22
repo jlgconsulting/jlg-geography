@@ -1,20 +1,20 @@
 package jlg.geography.test;
 
-import jlg.geography.*;
-import jlg.geography.wsg84.LatLon;
-import jlg.geography.wsg84.GeographicLine;
+import jlg.geography.geometry.Line;
+import jlg.geography.geometry.Point;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+
 
 public class GeographicLineTest {
     @Test
     public void with_array_of_cartesian_points_should_build_line(){
         //arrange
-        LatLon[] points = {new LatLon(1,1), new LatLon(2,2)};
+        Point[] points = {new Point(1,1), new Point(2,2)};
 
         //act
-        AbstractLine line = new GeographicLine(points);
+        Line line = new Line(points);
 
         //assert
         assertEquals(2, line.getPoints().size());
@@ -26,7 +26,7 @@ public class GeographicLineTest {
         double[] coordinates = {1.0,1.0,2.0,2.0};
 
         //act
-        AbstractLine line = new GeographicLine(coordinates);
+        Line line = new Line(coordinates);
 
         //assert
         assertEquals(2, line.getPoints().size());
