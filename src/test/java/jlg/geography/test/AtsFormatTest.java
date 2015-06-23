@@ -30,7 +30,7 @@ public class AtsFormatTest {
         Point point = new Point(latitude, longitude);
 
         // act
-        AtsPoint atsPoint = formatter.transformPoint(point);
+        AtsPoint atsPoint = formatter.transform(point);
 
         // assert
         double delta = 0.001;
@@ -50,7 +50,7 @@ public class AtsFormatTest {
         Line line = new Line(points);
 
         // act
-        AtsPoint[][] atsLine = formatter.transformLine(line);
+        AtsPoint[][] atsLine = formatter.transform(line);
 
         // assert
         int expectedNumberOfPoints = 7;
@@ -72,7 +72,7 @@ public class AtsFormatTest {
         Polygon polygon = new Polygon(points);
 
         // act
-        AtsPoint[][] atsPolygon = formatter.transformPolygon(polygon);
+        AtsPoint[][] atsPolygon = formatter.transform(polygon);
 
         // assert
         int expectedNumberOfPoints = 5;
@@ -92,7 +92,7 @@ public class AtsFormatTest {
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         // act
-        AtsPoint[][] atsMultiPolygon = formatter.transformMultiPolygon(multiPolygon);
+        AtsPoint[][] atsMultiPolygon = formatter.transformMulti(multiPolygon);
 
         // assert
         int expectedNumberOfPolygons = 2;
