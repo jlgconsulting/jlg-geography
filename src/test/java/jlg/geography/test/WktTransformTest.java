@@ -9,9 +9,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by dan-geabunea on 5/13/2015.
- */
 public class WktTransformTest {
     @Test
     public void should_transform_point_to_wkt_string(){

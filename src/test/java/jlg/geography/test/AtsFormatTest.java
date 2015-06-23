@@ -6,21 +6,13 @@ import jlg.geography.geometry.Point;
 import jlg.geography.geometry.Polygon;
 import jlg.geography.representation.ats.AtsFormat;
 import jlg.geography.representation.ats.AtsPoint;
-import org.junit.Before;
 import org.junit.Test;
-
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AtsFormatTest {
 
-    private AtsFormat formatter;
-
-    @Before
-    public void init() {
-        formatter = new AtsFormat();
-    }
 
     @Test
     public void transform_point_returns_correct_object_format() {
@@ -30,7 +22,7 @@ public class AtsFormatTest {
         Point point = new Point(latitude, longitude);
 
         // act
-        AtsPoint atsPoint = formatter.transform(point);
+        AtsPoint atsPoint = AtsFormat.transform(point);
 
         // assert
         double delta = 0.001;
@@ -40,7 +32,7 @@ public class AtsFormatTest {
     }
 
     @Test
-    public void transform_line_returs_correct_object() {
+    public void transform_line_returns_correct_object() {
         // arrange
         Point p1 = new Point(1, 2);
         Point p2 = new Point(3, 4);
@@ -50,7 +42,7 @@ public class AtsFormatTest {
         Line line = new Line(points);
 
         // act
-        AtsPoint[][] atsLine = formatter.transform(line);
+        AtsPoint[][] atsLine = AtsFormat.transform(line);
 
         // assert
         int expectedNumberOfPoints = 7;
@@ -72,7 +64,7 @@ public class AtsFormatTest {
         Polygon polygon = new Polygon(points);
 
         // act
-        AtsPoint[][] atsPolygon = formatter.transform(polygon);
+        AtsPoint[][] atsPolygon = AtsFormat.transform(polygon);
 
         // assert
         int expectedNumberOfPoints = 5;
@@ -92,7 +84,7 @@ public class AtsFormatTest {
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         // act
-        AtsPoint[][] atsMultiPolygon = formatter.transformMulti(multiPolygon);
+        AtsPoint[][] atsMultiPolygon = AtsFormat.transformMulti(multiPolygon);
 
         // assert
         int expectedNumberOfPolygons = 2;

@@ -9,11 +9,11 @@ import java.util.List;
 
 public class AtsFormat {
 
-    public AtsPoint transform(Point point) {
+    public static AtsPoint transform(Point point) {
         return new AtsPoint(point.getLongitude(), point.getLatitude());
     }
 
-    public AtsPoint[][] transform(Line line) {
+    public static AtsPoint[][] transform(Line line) {
         AtsPoint[] atsLine = new AtsPoint[line.getPoints().size() * 2 - 1];
         int lastIndex = line.getPoints().size() * 2 - 2;
 
@@ -30,7 +30,7 @@ public class AtsFormat {
         return finalAtsLine;
     }
 
-    public AtsPoint[][] transform(Polygon polygon) {
+    public static AtsPoint[][] transform(Polygon polygon) {
 
         AtsPoint[] atsPolygon = formatSinglePolygon(polygon.getPoints());
 
@@ -39,7 +39,7 @@ public class AtsFormat {
         return finalAtsPolygon;
     }
 
-    public AtsPoint[][] transformMulti(MultiPolygon multiPolygon) {
+    public static AtsPoint[][] transformMulti(MultiPolygon multiPolygon) {
         int size = multiPolygon.getPolygons().size();
         AtsPoint[][] atsMultiPolygon = new AtsPoint[size][];
 
@@ -50,7 +50,7 @@ public class AtsFormat {
         return atsMultiPolygon;
     }
 
-    private AtsPoint[] formatSinglePolygon(List<Point> points) {
+    private static AtsPoint[] formatSinglePolygon(List<Point> points) {
         AtsPoint[] atsPolygon = new AtsPoint[points.size()];
 
         for (int i = 0; i < points.size(); i++) {
