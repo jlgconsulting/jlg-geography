@@ -1,7 +1,7 @@
 package jlg.geography.test;
 
-import jlg.geography.Ats.AtsFormat;
-import jlg.geography.Ats.AtsPoint;
+import jlg.geography.ats.AtsFormat;
+import jlg.geography.ats.AtsPoint;
 import jlg.geography.geometry.Line;
 import jlg.geography.geometry.MultiPolygon;
 import jlg.geography.geometry.Point;
@@ -37,7 +37,7 @@ public class AtsFormatTest {
 
         // assert
         double delta = 0.001;
-        assertNotNull("Ats point is null!", atsPoint);
+        assertNotNull("ats point is null!", atsPoint);
         assertEquals("Latitude numbers don't correspond", latitude, atsPoint.getY(), delta);
         assertEquals("Longitude numbers don't correspond", longitude, atsPoint.getX(), delta);
     }
@@ -86,11 +86,12 @@ public class AtsFormatTest {
     @Test
     public void transform_multipolygon_returns_correct_object() {
         //arrange
-        final List<Double> somePolygonCoordinates = new ArrayList<Double>(Arrays.asList(10.123, 11.123, 12.123, 13.123, 10.123, 11.123));
-        final List<Double> someOtherPolygonCoordinates = new ArrayList<>(Arrays.asList(15.123, 15.123, 12.123, 13.123, 15.123, 15.123));
-        List<List<Double>> multipolygonPoints = new ArrayList<List<Double>>(){{
-            add(somePolygonCoordinates);add(someOtherPolygonCoordinates);
-        }};
+        final double[] somePolygonCoordinates = new double[] {10.123, 11.123, 12.123, 13.123, 10.123, 11.123};
+        final double[] someOtherPolygonCoordinates = new double[] {15.123, 15.123, 12.123, 13.123, 15.123, 15.123};
+        double[][] multipolygonPoints = new double[][]{
+                somePolygonCoordinates,
+                someOtherPolygonCoordinates
+        };
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         // act

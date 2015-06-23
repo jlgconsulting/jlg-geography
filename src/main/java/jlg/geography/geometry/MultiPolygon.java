@@ -8,21 +8,21 @@ import java.util.List;
 
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyNotNull;
+import static jlg.codecontract.CodeContract.verifyThat;
 
 public class MultiPolygon implements Boundable, GeometryFeature{
     private BoundingBox boundingBox;
     private List<Polygon> polygons;
-    private List<Point> points;
 
-    public MultiPolygon(List<List<Double>> multiPolygonPoints) {
+    public MultiPolygon(double[][] multiPolygonPoints) {
         verifyNotNull(multiPolygonPoints);
-        verifyNotEmpty(multiPolygonPoints);
+        verifyThat(multiPolygonPoints.length > 0, "Multipolygon in empty");
 
         this.polygons = new ArrayList<>();
-        for(List<Double> polygonPoints:multiPolygonPoints){
-            double[] coordinates = new double[polygonPoints.size()];
-            for (int i = 0; i < polygonPoints.size(); i++) {
-                coordinates[i] = polygonPoints.get(i);
+        for(double[] polygonPoints: multiPolygonPoints){
+            double[] coordinates = new double[polygonPoints.length];
+            for (int i = 0; i < polygonPoints.length; i++) {
+                coordinates[i] = polygonPoints[i];
             }
             this.polygons.add(new Polygon(coordinates));
         }

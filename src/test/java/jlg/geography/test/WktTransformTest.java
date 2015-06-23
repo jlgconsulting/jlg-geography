@@ -62,11 +62,12 @@ public class WktTransformTest {
     @Test
     public void should_transform_multi_polygon_to_wkt_string(){
         //arrange
-        final List<Double> somePolygonCoordinates = new ArrayList<Double>(Arrays.asList(10.123, 11.123, 12.123, 13.123, 10.123,11.123));
-        final List<Double> someOtherPolygonCoordinates = new ArrayList<Double>(Arrays.asList(15.123, 15.123, 12.123, 13.123, 15.123,15.123));
-        List<List<Double>> multipolygonPoints = new ArrayList<List<Double>>(){{
-            add(somePolygonCoordinates);add(someOtherPolygonCoordinates);
-        }};
+        final double[] somePolygonCoordinates = new double[] {10.123, 11.123, 12.123, 13.123, 10.123, 11.123};
+        final double[] someOtherPolygonCoordinates = new double[] {15.123, 15.123, 12.123, 13.123, 15.123, 15.123};
+        double[][] multipolygonPoints = new double[][]{
+                somePolygonCoordinates,
+                someOtherPolygonCoordinates
+        };
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         //act
