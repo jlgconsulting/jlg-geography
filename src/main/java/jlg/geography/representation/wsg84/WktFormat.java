@@ -1,4 +1,4 @@
-package jlg.geography.wsg84;
+package jlg.geography.representation.wsg84;
 
 import jlg.geography.GeometryFeature;
 import jlg.geography.geometry.Line;

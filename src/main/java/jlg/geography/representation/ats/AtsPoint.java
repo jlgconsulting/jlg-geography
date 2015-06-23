@@ -1,4 +1,4 @@
-package jlg.geography.ats;
+package jlg.geography.representation.ats;
 
 public class AtsPoint {
     double x;

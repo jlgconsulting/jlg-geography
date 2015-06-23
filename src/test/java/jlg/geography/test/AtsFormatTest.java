@@ -1,17 +1,14 @@
 package jlg.geography.test;
 
-import jlg.geography.ats.AtsFormat;
-import jlg.geography.ats.AtsPoint;
 import jlg.geography.geometry.Line;
 import jlg.geography.geometry.MultiPolygon;
 import jlg.geography.geometry.Point;
 import jlg.geography.geometry.Polygon;
+import jlg.geography.representation.ats.AtsFormat;
+import jlg.geography.representation.ats.AtsPoint;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -56,8 +53,8 @@ public class AtsFormatTest {
         AtsPoint[][] atsLine = formatter.transformLine(line);
 
         // assert
-        int expenctedNumberOfPoints = 7;
-        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsLine[0].length);
+        int expectedNumberOfPoints = 7;
+        assertEquals("Incorrect number of points", expectedNumberOfPoints, atsLine[0].length);
         assertEquals("First point is not same with last", atsLine[0][0].getX(), atsLine[0][6].getX(), 0.001);
         assertEquals("Incorrect object", p3.getLatitude(), atsLine[0][4].getY(), 0.01);
     }
@@ -78,8 +75,8 @@ public class AtsFormatTest {
         AtsPoint[][] atsPolygon = formatter.transformPolygon(polygon);
 
         // assert
-        int expenctedNumberOfPoints = 5;
-        assertEquals("Incorrect number of points", expenctedNumberOfPoints, atsPolygon[0].length);
+        int expectedNumberOfPoints = 5;
+        assertEquals("Incorrect number of points", expectedNumberOfPoints, atsPolygon[0].length);
         assertEquals("First point is not same with last", atsPolygon[0][0].getX(), atsPolygon[0][4].getX(), 0.001);
     }
 
@@ -98,8 +95,8 @@ public class AtsFormatTest {
         AtsPoint[][] atsMultiPolygon = formatter.transformMultiPolygon(multiPolygon);
 
         // assert
-        int expedtedNumberOfPolygons = 2;
-        assertEquals("Incorrect number of polygons", expedtedNumberOfPolygons, atsMultiPolygon.length);
+        int expectedNumberOfPolygons = 2;
+        assertEquals("Incorrect number of polygons", expectedNumberOfPolygons, atsMultiPolygon.length);
         assertEquals("Incorrect lenght of internal polygon", 3, atsMultiPolygon[1].length);
         assertEquals("Incorrect corespondent", 10.123, atsMultiPolygon[0][2].getY(), 0.001);
     }

@@ -4,12 +4,8 @@ import jlg.geography.geometry.Line;
 import jlg.geography.geometry.MultiPolygon;
 import jlg.geography.geometry.Point;
 import jlg.geography.geometry.Polygon;
-import jlg.geography.wsg84.WktFormat;
+import jlg.geography.representation.wsg84.WktFormat;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,8 +1,8 @@
 package jlg.geography.geometry;
 
 import jlg.geography.GeometryFeature;
-import jlg.geography.wsg84.LatitudeParser;
-import jlg.geography.wsg84.LongitudeParser;
+import jlg.geography.representation.wsg84.LatitudeParser;
+import jlg.geography.representation.wsg84.LongitudeParser;
 
 import static jlg.codecontract.CodeContract.verifyBetween;
 

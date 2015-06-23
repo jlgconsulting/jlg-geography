@@ -1,4 +1,4 @@
-package jlg.geography.ats;
+package jlg.geography.representation.ats;
 
 import jlg.geography.geometry.Line;
 import jlg.geography.geometry.MultiPolygon;
