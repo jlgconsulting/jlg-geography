@@ -27,4 +27,12 @@ public class AtsPoint {
     public void setY(double y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "AtsPoint{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }
