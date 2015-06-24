@@ -10,6 +10,7 @@ public class BoundingBox {
     private Point maxCoordinate;
     private Point centerCoordinate;
 
+    protected BoundingBox(){}
 
     public BoundingBox(Point... coordinates) {
         verifyThat(coordinates.length >= 2);

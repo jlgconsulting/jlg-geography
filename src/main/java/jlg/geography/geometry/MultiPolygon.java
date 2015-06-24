@@ -1,18 +1,21 @@
 package jlg.geography.geometry;
 
-import jlg.geography.GeometryFeature;
 import jlg.geography.Boundable;
+import jlg.geography.GeometryFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
 
 public class MultiPolygon implements Boundable, GeometryFeature{
     private BoundingBox boundingBox;
     private List<Polygon> polygons;
+
+    protected MultiPolygon(){
+        polygons = new ArrayList<>();
+    }
 
     public MultiPolygon(double[][] multiPolygonPoints) {
         verifyNotNull(multiPolygonPoints);

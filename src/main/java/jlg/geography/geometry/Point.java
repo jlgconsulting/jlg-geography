@@ -7,10 +7,10 @@ import jlg.geography.representation.wsg84.LongitudeParser;
 import static jlg.codecontract.CodeContract.verifyBetween;
 
 public class Point implements GeometryFeature{
-
-
     private double latitude;
     private double longitude;
+
+    protected Point(){}
 
     public Point(double latitude, double longitude) {
         this.latitude = latitude;

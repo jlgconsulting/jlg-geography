@@ -12,6 +12,10 @@ public class Polygon implements Boundable, GeometryFeature{
     private List<Point> points;
     private BoundingBox boundingBox;
 
+    protected Polygon(){
+        this.points = new ArrayList<>();
+    }
+
     public Polygon(Point[] points) {
         this.points = Arrays.asList(points);
         checkIfPolygonIsClosed();
