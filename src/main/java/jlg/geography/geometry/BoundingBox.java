@@ -38,15 +38,15 @@ public class BoundingBox {
         verifyThat(boundingBoxes != null);
         verifyNotEmpty(boundingBoxes);
 
-        double minLatitude = boundingBoxes.stream().mapToDouble(x -> x.getMinCoordinate().getLongitude()).min().getAsDouble();
-        double minLongitude = boundingBoxes.stream().mapToDouble(x -> x.getMinCoordinate().getLatitude()).min().getAsDouble();
-        double maxLatitude = boundingBoxes.stream().mapToDouble(x -> x.getMaxCoordinate().getLongitude()).max().getAsDouble();
-        double maxLongitude = boundingBoxes.stream().mapToDouble(x -> x.getMaxCoordinate().getLatitude()).max().getAsDouble();
+        double minLatitude = boundingBoxes.stream().mapToDouble(x -> x.getMinCoordinate().getLatitude()).min().getAsDouble();
+        double minLongitude = boundingBoxes.stream().mapToDouble(x -> x.getMinCoordinate().getLongitude()).min().getAsDouble();
+        double maxLatitude = boundingBoxes.stream().mapToDouble(x -> x.getMaxCoordinate().getLatitude()).max().getAsDouble();
+        double maxLongitude = boundingBoxes.stream().mapToDouble(x -> x.getMaxCoordinate().getLongitude()).max().getAsDouble();
 
         minCoordinate = new Point(minLatitude, minLongitude);
         maxCoordinate = new Point(maxLatitude, maxLongitude);
-        double centerLat = (maxCoordinate.getLongitude() + minCoordinate.getLatitude()) / 2;
-        double centerLon = (maxCoordinate.getLongitude() + minCoordinate.getLatitude()) / 2;
+        double centerLat = (maxCoordinate.getLatitude() + minCoordinate.getLatitude()) / 2;
+        double centerLon = (maxCoordinate.getLongitude() + minCoordinate.getLongitude()) / 2;
         centerCoordinate = new Point(centerLat,centerLon);
     }
 
