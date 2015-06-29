@@ -19,6 +19,11 @@ public class Line implements Boundable, GeometryFeature {
         this.points = new ArrayList<>();
     }
 
+    public Line(List<Point> points) {
+        this.points = points;
+        boundingBox = new BoundingBox(points.toArray(new Point[points.size()]));
+    }
+
     public Line(Point[] points) {
         this.points = Arrays.asList(points);
         boundingBox = new BoundingBox(points);

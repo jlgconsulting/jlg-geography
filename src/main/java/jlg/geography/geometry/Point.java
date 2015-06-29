@@ -51,4 +51,10 @@ public class Point implements GeometryFeature{
 
         return new Point(latitude, longitude);
     }
+
+    @Override
+    public String toString() {
+        return "Point: Latitude = " + latitude +
+                ", Longitude= " + longitude;
+    }
 }

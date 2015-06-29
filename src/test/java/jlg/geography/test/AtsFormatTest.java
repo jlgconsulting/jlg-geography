@@ -45,10 +45,10 @@ public class AtsFormatTest {
         AtsPoint[][] atsLine = AtsFormat.transform(line);
 
         // assert
-        int expectedNumberOfPoints = 7;
-        assertEquals("Incorrect number of points", expectedNumberOfPoints, atsLine[0].length);
-        assertEquals("First point is not same with last", atsLine[0][0].getX(), atsLine[0][6].getX(), 0.001);
-        assertEquals("Incorrect object", p3.getLatitude(), atsLine[0][4].getY(), 0.01);
+        int expectedNumberOfFragments = 3;
+        assertEquals("Incorrect number of fragments", expectedNumberOfFragments, atsLine.length);
+        assertEquals("First point is not same with last", atsLine[0][0].getX(), atsLine[0][2].getX(), 0.001);
+        assertEquals("Incorrect object", p3.getLatitude(), atsLine[2][0].getY(), 0.01);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class AtsFormatTest {
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
         // act
-        AtsPoint[][] atsMultiPolygon = AtsFormat.transformMulti(multiPolygon);
+        AtsPoint[][] atsMultiPolygon = AtsFormat.transform(multiPolygon);
 
         // assert
         int expectedNumberOfPolygons = 2;

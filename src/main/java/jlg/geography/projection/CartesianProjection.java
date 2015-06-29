@@ -79,6 +79,6 @@ public class CartesianProjection extends AbstractProjection {
         result[0] = (round(x * 2) / 2) * 2;
         result[1] = (round(y * 2) / 2) * 2;
 
-        return new Point((int)result[0], (int)result[1]);
+        return new Point((int)result[1], (int)result[0]);
     }
 }
