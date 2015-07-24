@@ -32,12 +32,7 @@ public class MultiPolygon implements Boundable, GeometryFeature{
             this.polygons.add(new Polygon(coordinates));
         }
 
-        //calculate boundign box
-        double minLatitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMinCoordinate().getLatitude()).min().getAsDouble();
-        double maxLatitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMaxCoordinate().getLongitude()).max().getAsDouble();
-        double minLongitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMinCoordinate().getLatitude()).min().getAsDouble();
-        double maxLongitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMaxCoordinate().getLongitude()).max().getAsDouble();
-        boundingBox = new BoundingBox(new Point(minLatitude,minLongitude), new Point(maxLatitude,maxLongitude));
+        calculateBoundingBox();
     }
 
     public MultiPolygon(Polygon[] polygons) {
@@ -67,7 +62,25 @@ public class MultiPolygon implements Boundable, GeometryFeature{
             multipolygonCoordinates[index] = getCoordinates.apply(polygon);
         });
 
-        new MultiPolygon(multipolygonCoordinates);
+        this.polygons = new ArrayList<>();
+        for(double[] polygonPoints: multipolygonCoordinates){
+            double[] coordinates = new double[polygonPoints.length];
+            for (int i = 0; i < polygonPoints.length; i++) {
+                coordinates[i] = polygonPoints[i];
+            }
+            this.polygons.add(new Polygon(coordinates));
+        }
+
+        calculateBoundingBox();
+    }
+
+    private void calculateBoundingBox() {
+        //calculate boundign box
+        double minLatitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMinCoordinate().getLatitude()).min().getAsDouble();
+        double maxLatitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMaxCoordinate().getLongitude()).max().getAsDouble();
+        double minLongitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMinCoordinate().getLatitude()).min().getAsDouble();
+        double maxLongitude = this.polygons.stream().mapToDouble(x -> x.getBoundingBox().getMaxCoordinate().getLongitude()).max().getAsDouble();
+        boundingBox = new BoundingBox(new Point(minLatitude,minLongitude), new Point(maxLatitude,maxLongitude));
     }
 
     @Override

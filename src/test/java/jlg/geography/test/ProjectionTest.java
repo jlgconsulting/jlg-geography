@@ -1,6 +1,7 @@
 package jlg.geography.test;
 
 import jlg.geography.geometry.Line;
+import jlg.geography.geometry.MultiPolygon;
 import jlg.geography.geometry.Point;
 import jlg.geography.geometry.Polygon;
 import jlg.geography.projection.CartesianProjection;
@@ -88,6 +89,22 @@ public class ProjectionTest {
         // act
         Polygon projectedPolygonNormal = projection.project(polygon);
         Polygon projectedPolygon = projection.project(polygon, transformToKilometers);
+
+        // assert
+        assertEquals("Transformation function was not correctly applied", projectedPolygonNormal.getPoints().get(0).getLatitude(), projectedPolygon.getPoints().get(0).getLatitude() * 1000, 0.1);
+    }
+
+    @Test
+    public void should_convert_a_MultiPolygon_object_and_apply_transformation_function() {
+        // arrange
+        Point centerOfProjection = new Point(1, 1);
+        MultiPolygon multipolygon = GeometricFeaturesFactory.getMultiPolygon(4);
+        Function<Double, Double> transformToKilometers = x -> x /  1000;
+        CartesianProjection projection = new CartesianProjection(centerOfProjection);
+
+        // act
+        MultiPolygon projectedPolygonNormal = projection.project(multipolygon);
+        MultiPolygon projectedPolygon = projection.project(multipolygon, transformToKilometers);
 
         // assert
         assertEquals("Transformation function was not correctly applied", projectedPolygonNormal.getPoints().get(0).getLatitude(), projectedPolygon.getPoints().get(0).getLatitude() * 1000, 0.1);

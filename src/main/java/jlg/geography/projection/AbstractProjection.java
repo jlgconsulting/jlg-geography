@@ -53,6 +53,11 @@ public abstract class AbstractProjection {
         return new Polygon(projectedPoints.toArray(new Point[projectedPoints.size()]));
     }
 
+    public MultiPolygon project(MultiPolygon multiPolygon) {
+        List<Polygon> projectedPolygons = multiPolygon.getPolygons().stream().map(polygon -> project(polygon)).collect(Collectors.toList());
+        return new MultiPolygon(projectedPolygons.toArray(new Polygon[projectedPolygons.size()]));
+    }
+
     public MultiPolygon project(MultiPolygon multiPolygon, Function<Double, Double> transformFunction) {
         List<Polygon> projectedPolygons = multiPolygon.getPolygons().stream().map(polygon -> project(polygon, transformFunction)).collect(Collectors.toList());
         return new MultiPolygon(projectedPolygons.toArray(new Polygon[projectedPolygons.size()]));
