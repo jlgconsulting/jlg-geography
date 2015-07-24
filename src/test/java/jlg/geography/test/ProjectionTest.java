@@ -67,12 +67,12 @@ public class ProjectionTest {
         // arrange
         Point centerOfProjection = new Point(1, 1);
         Line line = GeometricFeaturesFactory.getLine();
-        Function<Double, Double> makeKM = x -> x /  1000;
+        Function<Double, Double> transformToKilometers = x -> x /  1000;
         CartesianProjection projection = new CartesianProjection(centerOfProjection);
 
         // act
         Line projectedLineNormal = projection.project(line);
-        Line projectedLine = projection.project(line, makeKM);
+        Line projectedLine = projection.project(line, transformToKilometers);
 
         // assert
         assertEquals("Transformation function was not correctly applied", projectedLineNormal.getPoints().get(0).getLatitude(), projectedLine.getPoints().get(0).getLatitude() * 1000, 0.1);
