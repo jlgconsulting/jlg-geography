@@ -4,7 +4,9 @@ import jlg.geography.Boundable;
 import jlg.geography.GeometryFeature;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
@@ -38,6 +40,35 @@ public class MultiPolygon implements Boundable, GeometryFeature{
         boundingBox = new BoundingBox(new Point(minLatitude,minLongitude), new Point(maxLatitude,maxLongitude));
     }
 
+    public MultiPolygon(Polygon[] polygons) {
+        verifyNotNull(polygons);
+        verifyThat(polygons.length > 0, "Multipolygon in empty");
+        List<Polygon> polygonList = Arrays.asList(polygons);
+
+        Function<Polygon, double[]> getCoordinates = polygon -> {
+            List<Double> singlePolygonCoordinates = new ArrayList<>();
+
+            polygon.getPoints().stream().forEach(point -> {
+                singlePolygonCoordinates.add(point.getLatitude());
+                singlePolygonCoordinates.add(point.getLongitude());
+
+            });
+
+            double[] result = new double[singlePolygonCoordinates.size()];
+            for (int i = 0; i< singlePolygonCoordinates.size(); i++) {
+                result[i] = singlePolygonCoordinates.get(i);
+            }
+            return result;
+        };
+
+        double[][] multipolygonCoordinates = new double[polygons.length][];
+        polygonList.stream().forEach(polygon -> {
+            int index = polygonList.indexOf(polygon);
+            multipolygonCoordinates[index] = getCoordinates.apply(polygon);
+        });
+
+        new MultiPolygon(multipolygonCoordinates);
+    }
 
     @Override
     public BoundingBox getBoundingBox() {
