@@ -132,12 +132,15 @@ public class PolygonTest {
         };
 
         Polygon polygon = new Polygon(points);
-        Point pointOutside = new Point(7,14);
+        Point pointInside = new Point(7,14);
+        Point pointOutside = new Point(6.0, 9.0);
 
         //act
-        boolean result = polygon.contains(pointOutside);
+        boolean result1 = polygon.contains(pointInside);
+        boolean result2 = polygon.contains(pointOutside);
 
         //assert
-        assertFalse(result);
+        assertTrue("pointInside should be found inside of polygon", result1);
+        assertFalse("pointOutside should be found outside of polygon", result2);
     }
 }
