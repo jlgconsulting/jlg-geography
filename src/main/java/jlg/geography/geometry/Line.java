@@ -49,4 +49,23 @@ public class Line implements Boundable, GeometryFeature {
     public BoundingBox getBoundingBox() {
         return boundingBox;
     }
+
+    @Override
+    public boolean contains(Point point) {
+        if(!point.isInBoundingBox(getBoundingBox())){
+            return false;
+        }
+
+        for (int i = 0; i < this.points.size() - 2; i++) {
+            if (isOnSegment(this.points.get(i), this.points.get(i + 1), point))
+                return true;
+        }
+
+        return false;
+    }
+
+    private boolean isOnSegment(Point p0, Point p1, Point point) {
+        return (p1.getLongitude() - p0.getLongitude()) * (point.getLatitude() - p0.getLatitude())
+                - (point.getLongitude() - p0.getLongitude()) * (p1.getLatitude() - p0.getLatitude()) == 0;
+    }
 }

@@ -118,4 +118,26 @@ public class PolygonTest {
         //assert
         assertFalse(result);
     }
+
+    @Test
+    public void the_contains_point_method_for_circle_type_polygon() {
+        //arrange
+        Point[] points = {
+                new Point(19,15),
+                new Point(11,6),
+                new Point(3,12),
+                new Point(3,23),
+                new Point(11,22),
+                new Point(19,15)
+        };
+
+        Polygon polygon = new Polygon(points);
+        Point pointOutside = new Point(7,14);
+
+        //act
+        boolean result = polygon.contains(pointOutside);
+
+        //assert
+        assertFalse(result);
+    }
 }
