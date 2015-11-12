@@ -3,6 +3,7 @@ package jlg.geography.geometry;
 import jlg.geography.GeometryFeature;
 import jlg.geography.Boundable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
 
-public class Line implements Boundable, GeometryFeature {
+public class Line implements Boundable, GeometryFeature, Serializable{
 
     private List<Point> points;
     private BoundingBox boundingBox;

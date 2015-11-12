@@ -3,6 +3,7 @@ package jlg.geography.geometry;
 import jlg.geography.Boundable;
 import jlg.geography.GeometryFeature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.function.Function;
 import static jlg.codecontract.CodeContract.verifyNotNull;
 import static jlg.codecontract.CodeContract.verifyThat;
 
-public class MultiPolygon implements Boundable, GeometryFeature{
+public class MultiPolygon implements Boundable, GeometryFeature, Serializable{
     private BoundingBox boundingBox;
     private List<Polygon> polygons;
 

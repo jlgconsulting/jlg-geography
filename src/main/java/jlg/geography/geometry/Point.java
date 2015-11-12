@@ -4,9 +4,11 @@ import jlg.geography.GeometryFeature;
 import jlg.geography.representation.wsg84.LatitudeParser;
 import jlg.geography.representation.wsg84.LongitudeParser;
 
+import java.io.Serializable;
+
 import static jlg.codecontract.CodeContract.verifyBetween;
 
-public class Point implements GeometryFeature{
+public class Point implements GeometryFeature, Serializable{
     private double latitude;
     private double longitude;
 

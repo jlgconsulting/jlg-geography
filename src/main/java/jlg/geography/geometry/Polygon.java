@@ -4,11 +4,12 @@ import jlg.codecontract.CodeContractException;
 import jlg.geography.GeometryFeature;
 import jlg.geography.Boundable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Polygon implements Boundable, GeometryFeature{
+public class Polygon implements Boundable, GeometryFeature, Serializable{
     private List<Point> points;
     private BoundingBox boundingBox;
 
