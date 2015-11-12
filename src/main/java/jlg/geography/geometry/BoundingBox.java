@@ -1,11 +1,12 @@
 package jlg.geography.geometry;
 
+import java.io.Serializable;
 import java.util.List;
 
 import static jlg.codecontract.CodeContract.verifyNotEmpty;
 import static jlg.codecontract.CodeContract.verifyThat;
 
-public class BoundingBox {
+public class BoundingBox implements Serializable{
     private Point minCoordinate;
     private Point maxCoordinate;
     private Point centerCoordinate;
