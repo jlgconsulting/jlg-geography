@@ -22,20 +22,22 @@ public class AtsFormat {
 
     public static AtsPoint[][] transform(Line line) {
 
-        List<Point> allLinePoints = line.getPoints();
-        List<Line> unprocessedLines = new ArrayList<>();
+//        List<Line> unprocessedLines = new ArrayList<>();
+//
+//        for (int i = 0; i < allLinePoints.size() - 1; i++) {
+//            unprocessedLines.add(
+//                    new Line(Arrays.asList(allLinePoints.get(i), allLinePoints.get(i + 1)))
+//            );
+//        }
+//
+//        AtsPoint[][] finalAtsLine = new AtsPoint[unprocessedLines.size()][];
+//        for (int i = 0; i < unprocessedLines.size(); i++) {
+//            AtsPoint[] atsLine = formatSingleLine(unprocessedLines.get(i));
+//            finalAtsLine[i] = atsLine;
+//        }
 
-        for (int i = 0; i < allLinePoints.size() - 1; i++) {
-            unprocessedLines.add(
-                    new Line(Arrays.asList(allLinePoints.get(i), allLinePoints.get(i + 1)))
-            );
-        }
-
-        AtsPoint[][] finalAtsLine = new AtsPoint[unprocessedLines.size()][];
-        for (int i = 0; i < unprocessedLines.size(); i++) {
-            AtsPoint[] atsLine = formatSingleLine(unprocessedLines.get(i));
-            finalAtsLine[i] = atsLine;
-        }
+        AtsPoint[][] finalAtsLine = new AtsPoint[1][];
+        finalAtsLine[0] = formatLinePoints(line);
 
         return finalAtsLine;
     }
@@ -82,7 +84,6 @@ public class AtsFormat {
         verifyThat(line.getPoints().size() == 2, "Error trying to format a line segment. Must have 2 points exactly");
 
         AtsPoint[] atsLine = new AtsPoint[2];
-        int lastIndex = 2;
 
         for (int i = 0; i < line.getPoints().size(); i++) {
             AtsPoint atsPoint = new AtsPoint();
@@ -92,5 +93,22 @@ public class AtsFormat {
         }
 
         return atsLine;
+    }
+
+
+    private static AtsPoint[] formatLinePoints(Line line) {
+        List<Point> linePoints = line.getPoints();
+        List<AtsPoint> atsLinePoints = new ArrayList<>();
+
+        linePoints.stream().forEach(point -> {
+            AtsPoint atsPoint = new AtsPoint();
+            atsPoint.setX(point.getLongitude());
+            atsPoint.setY(point.getLatitude());
+
+            atsLinePoints.add(atsPoint);
+        });
+
+        AtsPoint[] atsLine = new AtsPoint[linePoints.size()];
+        return atsLinePoints.toArray(atsLine);
     }
 }

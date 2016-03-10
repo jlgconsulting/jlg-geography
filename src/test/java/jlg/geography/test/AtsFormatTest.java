@@ -46,10 +46,8 @@ public class AtsFormatTest {
         AtsPoint[][] atsLine = AtsFormat.transform(line);
 
         // assert
-        int expectedNumberOfFragments = 3;
-        assertEquals("Incorrect number of fragments", expectedNumberOfFragments, atsLine.length);
-        assertEquals("Incorect size of each segment", atsLine[0].length, 2);
-        assertEquals("Incorrect object", p4.getLatitude(), atsLine[2][1].getY(), 0.01);
+        assertEquals("Incorect size of created ats line", atsLine[0].length, 4);
+        assertEquals("Incorrect object", p2.getLatitude(), atsLine[0][1].getY(), 0.01);
     }
 
     @Test
