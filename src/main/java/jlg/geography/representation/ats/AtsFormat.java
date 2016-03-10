@@ -13,8 +13,11 @@ import static jlg.codecontract.CodeContract.verifyThat;
 
 public class AtsFormat {
 
-    public static AtsPoint transform(Point point) {
-        return new AtsPoint(point.getLongitude(), point.getLatitude());
+    public static AtsPoint[][] transform(Point point) {
+
+        AtsPoint[] atsPoint = {new AtsPoint(point.getLongitude(), point.getLatitude())};
+        AtsPoint[][] finalAtsPoint = {atsPoint};
+        return finalAtsPoint;
     }
 
     public static AtsPoint[][] transform(Line line) {
@@ -24,7 +27,7 @@ public class AtsFormat {
 
         for (int i = 0; i < allLinePoints.size() - 1; i++) {
             unprocessedLines.add(
-                    new Line(Arrays.asList(allLinePoints.get(i), allLinePoints.get(i +1), allLinePoints.get(i)))
+                    new Line(Arrays.asList(allLinePoints.get(i), allLinePoints.get(i + 1)))
             );
         }
 
@@ -38,8 +41,10 @@ public class AtsFormat {
     }
 
     public static AtsPoint[][] transform(Polygon polygon) {
+        List<Point> polygonPoints = polygon.getPoints();
+        List<Point> pointsToUse = polygonPoints.subList(0, polygonPoints.size() - 1);
 
-        AtsPoint[] atsPolygon = formatSinglePolygon(polygon.getPoints());
+        AtsPoint[] atsPolygon = formatSinglePolygon(pointsToUse);
 
         AtsPoint[][] finalAtsPolygon = new AtsPoint[1][];
         finalAtsPolygon[0] = atsPolygon;
@@ -50,8 +55,11 @@ public class AtsFormat {
         int size = multiPolygon.getPolygons().size();
         AtsPoint[][] atsMultiPolygon = new AtsPoint[size][];
 
-        for (int i = 0; i < multiPolygon.getPolygons().size(); i++)
-            atsMultiPolygon[i] = formatSinglePolygon(multiPolygon.getPolygons().get(i).getPoints());
+        for (int i = 0; i < multiPolygon.getPolygons().size(); i++) {
+            List<Point> polygonPoints = multiPolygon.getPolygons().get(i).getPoints();
+            List<Point> pointsToUse = polygonPoints.subList(0, polygonPoints.size() - 1);
+            atsMultiPolygon[i] = formatSinglePolygon(pointsToUse);
+        }
 
 
         return atsMultiPolygon;
@@ -71,9 +79,9 @@ public class AtsFormat {
     }
 
     private static AtsPoint[] formatSingleLine(Line line) {
-        verifyThat(line.getPoints().size() == 3, "Error trying to format a line segment. Must have 3 points exactly");
+        verifyThat(line.getPoints().size() == 2, "Error trying to format a line segment. Must have 2 points exactly");
 
-        AtsPoint[] atsLine = new AtsPoint[3];
+        AtsPoint[] atsLine = new AtsPoint[2];
         int lastIndex = 2;
 
         for (int i = 0; i < line.getPoints().size(); i++) {
@@ -81,7 +89,6 @@ public class AtsFormat {
             atsPoint.setX(line.getPoints().get(i).getLongitude());
             atsPoint.setY(line.getPoints().get(i).getLatitude());
             atsLine[i] = atsPoint;
-            atsLine[lastIndex - i] = atsPoint;
         }
 
         return atsLine;

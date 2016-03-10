@@ -9,6 +9,7 @@ import jlg.geography.representation.ats.AtsPoint;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class AtsFormatTest {
@@ -22,13 +23,13 @@ public class AtsFormatTest {
         Point point = new Point(latitude, longitude);
 
         // act
-        AtsPoint atsPoint = AtsFormat.transform(point);
+        AtsPoint[][] atsPoint = AtsFormat.transform(point);
 
         // assert
         double delta = 0.001;
         assertNotNull("ats point is null!", atsPoint);
-        assertEquals("Latitude numbers don't correspond", latitude, atsPoint.getY(), delta);
-        assertEquals("Longitude numbers don't correspond", longitude, atsPoint.getX(), delta);
+        assertEquals("Latitude numbers don't correspond", latitude, atsPoint[0][0].getY(), delta);
+        assertEquals("Longitude numbers don't correspond", longitude, atsPoint[0][0].getX(), delta);
     }
 
     @Test
@@ -47,8 +48,8 @@ public class AtsFormatTest {
         // assert
         int expectedNumberOfFragments = 3;
         assertEquals("Incorrect number of fragments", expectedNumberOfFragments, atsLine.length);
-        assertEquals("First point is not same with last", atsLine[0][0].getX(), atsLine[0][2].getX(), 0.001);
-        assertEquals("Incorrect object", p3.getLatitude(), atsLine[2][0].getY(), 0.01);
+        assertEquals("Incorect size of each segment", atsLine[0].length, 2);
+        assertEquals("Incorrect object", p4.getLatitude(), atsLine[2][1].getY(), 0.01);
     }
 
     @Test
@@ -67,19 +68,22 @@ public class AtsFormatTest {
         AtsPoint[][] atsPolygon = AtsFormat.transform(polygon);
 
         // assert
-        int expectedNumberOfPoints = 5;
+        int expectedNumberOfPoints = 4;
         assertEquals("Incorrect number of points", expectedNumberOfPoints, atsPolygon[0].length);
-        assertEquals("First point is not same with last", atsPolygon[0][0].getX(), atsPolygon[0][4].getX(), 0.001);
+        assertEquals("Incorect last coordinate", atsPolygon[0][3].getX(), 3, 0.001);
+        assertEquals("Incorect last coordinate", atsPolygon[0][3].getY(), 1, 0.001);
     }
 
     @Test
     public void transform_multipolygon_returns_correct_object() {
         //arrange
-        final double[] somePolygonCoordinates = new double[] {10.123, 11.123, 12.123, 13.123, 10.123, 11.123};
-        final double[] someOtherPolygonCoordinates = new double[] {15.123, 15.123, 12.123, 13.123, 15.123, 15.123};
+        final double[] firstPolygonCoordinates = new double[] {10.123, 11.123, 12.123, 13.123, 14.0, 5.0, 24.0, 6.0, 10.123, 11.123};
+        final double[] secondOtherPolygonCoordinates = new double[] {15.123, 15.123,10.0, 11.0, 12.123, 13.123, 15.123, 15.123};
+        final double[] thirdOtherPolygonCoordinates = new double[] {15.123, 15.123, 5.0, 5.0, 18.0, 10.0, 12.123, 13.123, 15.123, 15.123};
         double[][] multipolygonPoints = new double[][]{
-                somePolygonCoordinates,
-                someOtherPolygonCoordinates
+                firstPolygonCoordinates,
+                secondOtherPolygonCoordinates,
+                thirdOtherPolygonCoordinates
         };
         MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
 
@@ -87,9 +91,32 @@ public class AtsFormatTest {
         AtsPoint[][] atsMultiPolygon = AtsFormat.transform(multiPolygon);
 
         // assert
-        int expectedNumberOfPolygons = 2;
+        int expectedNumberOfPolygons = 3;
+        assertEquals("Incorrect number of polygons", expectedNumberOfPolygons, atsMultiPolygon.length);
+        assertEquals("Incorrect lenght of internal polygon", 4, atsMultiPolygon[0].length);
+        assertNotEquals("Last point should not repeat", 10.123, atsMultiPolygon[0][3].getY(), 0.001);
+    }
+
+    @Test
+    public void transform_multipolygon_returns_correct_object_secont_test() {
+        //arrange
+        final double[] firstPolygonCoordinates = new double[] {10.123, 11.123, 12.123, 13.123, 14.0, 5.0, 24.0, 6.0, 10.123, 11.123};
+        final double[] secondOtherPolygonCoordinates = new double[] {15.123, 15.123,10.0, 11.0, 12.123, 13.123, 15.123, 15.123};
+        final double[] thirdOtherPolygonCoordinates = new double[] {15.123, 15.123, 5.0, 5.0, 18.0, 10.0, 12.123, 13.123, 15.123, 15.123};
+        double[][] multipolygonPoints = new double[][]{
+                firstPolygonCoordinates,
+                secondOtherPolygonCoordinates,
+                thirdOtherPolygonCoordinates
+        };
+        MultiPolygon multiPolygon = new MultiPolygon(multipolygonPoints);
+
+        // act
+        AtsPoint[][] atsMultiPolygon = AtsFormat.transform(multiPolygon);
+
+        // assert
+        int expectedNumberOfPolygons = 3;
         assertEquals("Incorrect number of polygons", expectedNumberOfPolygons, atsMultiPolygon.length);
         assertEquals("Incorrect lenght of internal polygon", 3, atsMultiPolygon[1].length);
-        assertEquals("Incorrect corespondent", 10.123, atsMultiPolygon[0][2].getY(), 0.001);
+        assertNotEquals("Last point should not repeat", 15.123, atsMultiPolygon[1][2].getY(), 0.001);
     }
 }
