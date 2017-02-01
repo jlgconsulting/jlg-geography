@@ -1,4 +1,7 @@
-# jlg-geography
+# JLG Geography API
+
+![Build Status](http://176.223.222.182:8082/app/rest/builds/buildType:(id:JlgGeography_Build)/statusIcon)
+
 A library that facilitates the creation and manipulation of geographic information. Highlights of this API:
 * implementation of cartesian coordinates
 * implementation of wsg84 coordinates expressed as latitude and longitude
